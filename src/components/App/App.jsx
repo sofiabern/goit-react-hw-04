@@ -18,7 +18,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [total, setTotal] = useState(0);
-  const [isNotAlikePhoto, setIsNotAlikePhoto] = useState(false);
+  const [isUniqueQuery, setIsUniqueQuery] = useState(false);
 
   // Modal
   const [selectedImageId, setSelectedImageId] = useState(null);
@@ -34,13 +34,13 @@ function App() {
 
   useEffect(() => {
     if (modalIsOpen) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     }
 
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = "unset";
     };
   }, [modalIsOpen]);
   //
@@ -54,17 +54,14 @@ function App() {
       try {
         setIsLoading(true);
         setIsError(false);
-        setIsNotAlikePhoto(false);
-    
 
         const data = await getPhotos(searchQuery, page);
         const results = await data.results;
 
-        if(!data.total_pages) setIsNotAlikePhoto(true)
-
         setPhotos((prevState) => [...prevState, ...results]);
         setTotal(data.total_pages);
-       
+        
+        if(!results.length) setIsUniqueQuery(true);
       } catch (error) {
         setIsError(true);
       } finally {
@@ -78,6 +75,7 @@ function App() {
   const handleSearch = async (value) => {
     setSearchQuery(value);
     setPage(1);
+    setIsUniqueQuery(false);
     setPhotos([]);
   };
 
@@ -95,9 +93,13 @@ function App() {
     <>
       <SearchBar onSearch={handleSearch} />
 
-      {isError && <ErrorMessage  message={"Oops! There was an error! Try again!"}/>}
+      {isError && (
+        <ErrorMessage message={"Oops! There was an error! Try again!"} />
+      )}
 
-      {isNotAlikePhoto && <ErrorMessage message={"Your query is too unique. Try another one."} />}
+      {isUniqueQuery && (
+        <ErrorMessage message={"Your query is too unique. Try another one."} />
+      )}
 
       {photos.length > 0 && (
         <ImageGallery images={photos} onImageClicked={getImageId} />

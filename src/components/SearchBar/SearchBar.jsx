@@ -12,7 +12,7 @@ function SearchBar({ onSearch }) {
 
       onSubmit={(values, actions) => {
 
-        if (!values.query) toast.error("Type something in!");
+        if (!values.query) return toast.error("Type something in!");
 
         onSearch(values.query);
 

@@ -62,6 +62,7 @@ function ImageModal({ images, selectedImageId, isOpen, onRequestClose }) {
             src={selectedImage.urls.regular}
             alt={selectedImage.alt_description}
             className={css.image}
+            loading="lazy"
           />
 
           <button onClick={onRequestClose} className={css.button}>
