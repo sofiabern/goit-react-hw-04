@@ -11,7 +11,6 @@ import ImageModal from "../ImageModal/ImageModal";
 
 import { getPhotos } from "../../images-api";
 
-
 function App() {
   const [photos, setPhotos] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -19,9 +18,9 @@ function App() {
   const [page, setPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [total, setTotal] = useState(0);
-  const [selectedImageId, setSelectedImageId] = useState(null);
 
-// Modal
+  // Modal
+  const [selectedImageId, setSelectedImageId] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
 
   function openModal() {
@@ -31,8 +30,7 @@ function App() {
   function closeModal() {
     setIsOpen(false);
   }
-// 
-
+  //
 
   useEffect(() => {
     if (!searchQuery.trim()) {
@@ -71,12 +69,8 @@ function App() {
 
   const getImageId = (imageId) => {
     setSelectedImageId(imageId);
-    openModal()
-    console.log(imageId);
-    console.log(modalIsOpen)
+    openModal();
   };
-
-
 
   const isPhotos = page === total;
   return (
