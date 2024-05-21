@@ -60,8 +60,8 @@ function App() {
 
         setPhotos((prevState) => [...prevState, ...results]);
         setTotal(data.total_pages);
-        
-        if(!results.length) setIsUniqueQuery(true);
+
+        if (!results.length) setIsUniqueQuery(true);
       } catch (error) {
         setIsError(true);
       } finally {
@@ -97,9 +97,7 @@ function App() {
         <ErrorMessage message={"Oops! There was an error! Try again!"} />
       )}
 
-      {isUniqueQuery && (
-        <ErrorMessage message={"Your query is too unique. Try another one."} />
-      )}
+      {isUniqueQuery && <ErrorMessage message={"Your query is too unique. Try another one."}/>}
 
       {photos.length > 0 && (
         <ImageGallery images={photos} onImageClicked={getImageId} />

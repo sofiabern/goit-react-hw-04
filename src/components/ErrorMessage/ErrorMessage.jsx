@@ -1,13 +1,12 @@
-import { useEffect } from "react";
-import toast, { Toaster } from "react-hot-toast";
+
+import css from "./ErrorMessage.module.css";
+
 
 function ErrorMessage({ message }) {
-  useEffect(() => {
-    toast.error(message);
-  }, [message]);
 
-  return <Toaster position="top-right"
-  reverseOrder={false} />;
+  return(
+    <p className={css.error}>{message}</p>
+  )
 }
 
 export default ErrorMessage;
