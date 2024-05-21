@@ -15,6 +15,5 @@ export const getPhotos = async (value, currentPage) => {
         Authorization: `Client-ID ${KEY}`, 
       },
   });
-  
   return response.data;
 };

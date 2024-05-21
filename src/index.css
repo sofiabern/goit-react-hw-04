@@ -12,3 +12,17 @@ ul{
   margin: 0;
   padding: 0;
 }
+
+a{
+  text-decoration: none;
+  color: #111111;
+  display: block;
+}
+
+p{
+  margin: 0;
+}
+
+img{
+  display: block;
+}
